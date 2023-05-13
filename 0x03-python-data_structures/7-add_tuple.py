@@ -8,6 +8,6 @@ def add_tuples(tuple_a, tuple_b):
         tuple_b = (0, 0)
     elif len(tuple_b) < 2:
         tuple_b = (tuple_b[0], 0)
-    add1 = tuple_a[0] + tuple_b[0]
-    add2 = tuple_a[1] + tuple_b[1]
+    add1 = (tuple_a[0] + tuple_b[0])
+    add2 = (tuple_a[1] + tuple_b[1])
     return add1, add2
