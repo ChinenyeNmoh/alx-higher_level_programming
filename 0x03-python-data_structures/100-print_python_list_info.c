@@ -1,6 +1,6 @@
+#include <Python.h>
 #include <object.h>
 #include <listobject.h>
-#include <Python.h>
 /**
  * print_python_list_info - prints information about a python list object
  * @p: pointer to generic PyObject which is of PyListObject type
@@ -11,6 +11,7 @@ void print_python_list_info(PyObject *p)
 {
 	long int size = PyList_Size(p);
 	int i = 0;
+	const char *ele_type;
 	PyListObject *obj = (PyListObject *)p;
 
 	printf("[*] Size of the Python List = %li\n", size);
