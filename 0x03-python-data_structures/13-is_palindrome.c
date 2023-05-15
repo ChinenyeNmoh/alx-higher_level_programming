@@ -1,6 +1,6 @@
 #include "lists.h"
 #include <stdio.h>
-listint_t *findmiddle(listint_t *head);
+
 void reverse(listint_t **head);
 int is_palindrome(listint_t **head);
 /**
@@ -28,27 +28,6 @@ void reverse(listint_t **head)
 }
 
 /**
- * findmiddle - finds the middle of a linked list
- * @head: pointer to head of linked list so we can modify it
- *
- * Return: middle node
- */
-listint_t *findmiddle(listint_t *head)
-{
-	if (head == NULL)
-		return (NULL);
-	listint_t *fast, *slow;
-
-	fast = head;
-	slow = head;
-	while (fast != NULL && fast->next != NULL)
-	{
-		fast = fast->next->next;
-		slow = slow->next;
-	}
-	return (slow);
-}
-/**
  * is_palindrome - checks if a linked list is a palindrome
  * @head: double pointer to the head of the linked list
  *
@@ -56,18 +35,42 @@ listint_t *findmiddle(listint_t *head)
  */
 int is_palindrome(listint_t **head)
 {
+	listint_t *slow = *head, *fast = *head, *temp = *head, *dup = NULL;
+
 	if (*head == NULL || (*head)->next == NULL)
 		return (1);
-	listint_t *mid = findmiddle(*head);
-	listint_t *tempHead = *head;
 
-	reverse(&mid);
-	while (mid != NULL)
+	while (1)
 	{
-		if (tempHead->n != mid->n)
-			return (0);
-		tempHead = tempHead->next;
-		mid = mid->next;
+		fast = fast->next->next;
+		if (!fast)
+		{
+			dup = slow->next;
+			break;
+		}
+		if (!fast->next)
+		{
+			dup = slow->next->next;
+			break;
+		}
+		slow = slow->next;
 	}
-	return (1);
+
+	reverse(&dup);
+
+	while (dup && temp)
+	{
+		if (temp->n == dup->n)
+		{
+			dup = dup->next;
+			temp = temp->next;
+		}
+		else
+			return (0);
+	}
+
+	if (!dup)
+		return (1);
+
+	return (0);
 }
