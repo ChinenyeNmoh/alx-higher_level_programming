@@ -1,25 +1,29 @@
 #include "lists.h"
 #include <stdio.h>
 /**
- * reverse_list - reverses a linked list
+ * reverse - reverses a linked list
  * @head: double pointer to head of linked list so we can modify it
  *
  * Return: always void, modifies head itself.
  */
-void reverse_list(listint_t **head)
+void reverse(listint_t **head)
 {
-	listint_t *next = NULL, *prev = NULL, *cur;
+	listint_t *prev, *current, *nextnode;
 
-	cur = *head;
-	while (cur)
+	if (head == NULL)
+		return;
+	prev = NULL;
+	current = nextnode = *head;
+	while (nextnode != NULL)
 	{
-		next = cur->next;
-		cur->next = prev;
-		prev = cur;
-		cur = next;
+		nextnode = nextnode->next;
+		current->next = prev;
+		prev = current;
+		current = nextnode;
 	}
 	*head = prev;
 }
+
 /**
  * is_palindrome - checks if a linked list is a palindrome
  * @head: double pointer to the head of the linked list
@@ -28,42 +32,39 @@ void reverse_list(listint_t **head)
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *slow = *head, *fast = *head, *temp = *head, *dup = NULL;
-
 	if (*head == NULL || (*head)->next == NULL)
 		return (1);
+	listint_t *mid = findmiddle(*head);
+	listint_t *tempHead = *head;
 
-	while (1)
+	reverse(&mid);
+	while (mid != NULL)
+	{
+		if (tempHead->n != mid->n)
+			return (0);
+		tempHead = tempHead->next;
+		mid = mid->next;
+	}
+	return (1);
+}
+/**
+ * findmiddle - finds the middle of a linked list
+ * @head: pointer to head of linked list so we can modify it
+ *
+ * Return: middle node
+ */
+listint_t *findmiddle(listint_t *head)
+{
+	if (head == NULL)
+		return (NULL);
+	listint_t *fast, *slow;
+
+	fast = head;
+	slow = head;
+	while (fast != NULL && fast->next != NULL)
 	{
 		fast = fast->next->next;
-		if (!fast)
-		{
-			dup = slow->next;
-			break;
-		}
-		if (!fast->next)
-		{
-			dup = slow->next->next;
-			break;
-		}
 		slow = slow->next;
 	}
-
-	reverse_list(&dup);
-
-	while (dup && temp)
-	{
-		if (temp->n == dup->n)
-		{
-			dup = dup->next;
-			temp = temp->next;
-		}
-		else
-			return (0);
-	}
-
-	if (!dup)
-		return (1);
-
-	return (0);
+	return (slow);
 }
