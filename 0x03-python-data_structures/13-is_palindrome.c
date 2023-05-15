@@ -28,6 +28,27 @@ void reverse(listint_t **head)
 }
 
 /**
+ * findmiddle - finds the middle of a linked list
+ * @head: pointer to head of linked list so we can modify it
+ *
+ * Return: middle node
+ */
+listint_t *findmiddle(listint_t *head)
+{
+	if (head == NULL)
+		return (NULL);
+	listint_t *fast, *slow;
+
+	fast = head;
+	slow = head;
+	while (fast != NULL && fast->next != NULL)
+	{
+		fast = fast->next->next;
+		slow = slow->next;
+	}
+	return (slow);
+}
+/**
  * is_palindrome - checks if a linked list is a palindrome
  * @head: double pointer to the head of the linked list
  *
@@ -49,25 +70,4 @@ int is_palindrome(listint_t **head)
 		mid = mid->next;
 	}
 	return (1);
-}
-/**
- * findmiddle - finds the middle of a linked list
- * @head: pointer to head of linked list so we can modify it
- *
- * Return: middle node
- */
-listint_t *findmiddle(listint_t *head)
-{
-	if (head == NULL)
-		return (NULL);
-	listint_t *fast, *slow;
-
-	fast = head;
-	slow = head;
-	while (fast != NULL && fast->next != NULL)
-	{
-		fast = fast->next->next;
-		slow = slow->next;
-	}
-	return (slow);
 }
