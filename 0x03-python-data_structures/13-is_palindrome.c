@@ -1,5 +1,8 @@
 #include "lists.h"
 #include <stdio.h>
+listint_t *findmiddle(listint_t *head);
+void reverse(listint_t **head);
+int is_palindrome(listint_t **head);
 /**
  * reverse - reverses a linked list
  * @head: double pointer to head of linked list so we can modify it
