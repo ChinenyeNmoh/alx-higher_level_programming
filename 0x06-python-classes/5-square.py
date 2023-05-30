@@ -5,10 +5,7 @@
 class Square:
     """Represents a square class """
     def __init__(self, size=0):
-        """Initialize a new square.
-        Args:
-            size (int): The size of the new square.
-        """
+        """Initialize data with constructor"""
 
         if type(size) != int:
             raise TypeError("size must be an integer")
@@ -22,14 +19,22 @@ class Square:
         return self.__size
 
     @size.setter
-    def size(self, value):
-        if type(value) != int:
+    def size(self, new_size):
+        if type(new_size) != int:
             raise TypeError("size must be an integer")
-        elif value < 0:
+        elif new_size < 0:
             raise ValueError("size must be >= 0")
         else:
-            self.__size = value
+            self.__size = new_size
 
     def area(self):
         """ Returns the area of a square """
-        return self.__size * self.__size
+        return (self.__size * self.__size)
+
+    def my_print(self):
+        """ prints # on stdout"""
+        if self.__size == 0:
+            print()
+        else:
+            for i in range(self.__size):
+                print("#" * self.__size)
