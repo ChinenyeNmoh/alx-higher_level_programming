@@ -41,13 +41,21 @@ class Square:
         """ Returns the area of a square """
         return (self.__size * self.__size)
 
+    def position_print(self):
+        """returns the printed square with position"""
+        pos = ""
+        if not self.size:
+            return "\n"
+        for w in range(self.position[1]):
+            pos += "\n"
+        for w in range(self.size):
+            for i in range(self.position[0]):
+                pos += " "
+            for j in range(self.size):
+                pos += "#"
+            pos += "\n"
+        return pos
+
     def my_print(self):
-        size = self.__size
-        lines = self.__position[1]
-        spaces = self.__position[0]
-        if size == 0:
-            print()
-        for newlines in range(lines):
-            print()
-        for row in range(size):
-            print((' ' * spaces) + ('#' * size))
+        """print square."""
+        print(self.position_print(), end="")
