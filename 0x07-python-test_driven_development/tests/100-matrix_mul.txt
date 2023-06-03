@@ -1,0 +1,113 @@
+First import ``matrix_mul``
+>>> matrix_mul = __import__('100-matrix_mul').matrix_mul
+
+
+#testing with lists of list with int
+>>> matrix_mul([[5, 3, 4, 2], [8, 1, 0, 3]],[[1, 4, 0], [5, 3, 7], [0, 9, 5], [5, 1, 4]])
+[[30, 67, 49], [28, 38, 19]]
+
+
+#testing with lists of list with float
+>>> matrix_mul([[5.2, 3.2, 4.2, 2.2], [8.2, 1.2, 0.2, 3.2]],[[1.2, 4.2, 0.2], [5.2, 3.2, 7.2], [0.2, 9.2, 5.2], [5.2, 1.2, 4.2]])
+[[35.160000000000004, 73.36, 55.160000000000004], [32.76, 43.96000000000001, 24.76]]
+
+
+#testing with negative and positive int
+>>> matrix_mul([[5, 3, -4, -2], [8, -1, 0, -3]],[[1, 4, 0], [-5, 3, 7], [0, -9, 5], [5, 1, 4]])
+[[-20, 63, -7], [-2, 26, -19]]
+
+
+#testing int and float combination
+>>> matrix_mul([[5, 3, 4.1, 2], [8.9, 1, 0, 3]],[[1, 4, 0], [5.0, 3, 7], [0, 9, 5.1], [5, 1, 4]])
+[[30.0, 67.9, 49.91], [28.9, 41.6, 19.0]]
+
+
+#testing m_a with int and string
+>>> matrix_mul([[1, 2], ['9', 4]], [[1, 2], [3, 4]])
+Traceback (most recent call last): 
+...
+TypeError: m_a should contain only integers or floats
+
+
+#testing m_b with int and string
+>>> matrix_mul([[1, 2], [3, 4]], [['0', 2], [3, 4]])
+Traceback (most recent call last): 
+...
+TypeError: m_b should contain only integers or floats
+
+
+#testing rows in m_b that doesn't have same size
+>>> matrix_mul([[1, 2], [3, 4]], [[8], [13, 49]])
+Traceback (most recent call last): 
+...
+TypeError: each row of m_b must be of the same size
+
+
+#testing rows in m_a doesn't have same size
+>>> matrix_mul([[4, 6], [3]], [[9, 2], [7, 4]])
+Traceback (most recent call last): 
+...
+TypeError: each row of m_a must be of the same size
+
+
+#lists in 'm_b' shouldn't be empty
+>>> matrix_mul([[3, 5], [3, 9]], [[]])
+Traceback (most recent call last): 
+...
+ValueError: m_b can't be empty
+
+
+#lists in 'm_a' shouldn't be empty
+>>> matrix_mul([], [[1, 2], [3, 4]])
+Traceback (most recent call last): 
+...
+ValueError: m_a can't be empty
+
+
+#testing with one argument
+>>> matrix_mul([[1, 2], [3, 4]])
+Traceback (most recent call last):
+...
+TypeError: matrix_mul() missing 1 required positional argument: 'm_b'
+
+
+#testing with with no argument
+>>> matrix_mul()
+Traceback (most recent call last):
+...
+TypeError: matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'
+
+
+#testing with matrix which colunm of m_a is not equal to row of m_b
+>>> matrix_mul([[1, 2, 3], [3, 4, 5]], [[1, 2], [3, 4]])
+Traceback (most recent call last):
+...
+ValueError: m_a and m_b can't be multiplied
+
+
+#testing m_b with int and not list
+>>> matrix_mul([[1, 2], [3, 7]], 9)
+Traceback (most recent call last):
+...
+TypeError: m_b must be a list
+
+
+#testing m_a with float value not a list
+>>> matrix_mul(5.9,[[1, 9], [3, 4]])
+Traceback (most recent call last):
+...
+TypeError: m_a must be a list
+
+
+#testing if m_a is list of lists
+>>> matrix_mul([1, 4], [[1, 2], [3, 4]])
+Traceback (most recent call last):
+...
+TypeError: m_a must be a list of lists
+
+
+#testing if m_b is list of lists
+>>> matrix_mul([[1, 2], [3, 4]], [1, 4])
+Traceback (most recent call last):
+...
+TypeError: m_b must be a list of lists
