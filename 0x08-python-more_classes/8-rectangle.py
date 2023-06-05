@@ -59,8 +59,10 @@ class Rectangle:
         if not isinstance(rect_2, Rectangle):
             raise TypeError("rect_2 must be an instance of Rectangle")
         max = rect_1
-        if rect_1.area() <= rect_2.area():
+        if rect_1.area() < rect_2.area():
             max = rect_2
+        if rect_1.area() == rect_2.area():
+            max = rect_1
         return max
 
     def perimeter(self):
