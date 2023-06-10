@@ -2,13 +2,12 @@
 
 
 class MyInt(int):
-    """inversed int, overriding operator methods / comparison methods
-    """
+    """overriding operator methods / comparison methods"""
 
-    def __eq__(self, other):
-        """ changes == to !="""
-        return (int(self) != other)
+    def __eq__(self, value):
+        """Override == opeartor with != behavior."""
+        return self.real != value
 
-    def __ne__(self, other):
-        """ changes != to =="""
-        return (int(self) == other)
+    def __ne__(self, value):
+        """Override != operator with == behavior."""
+        return self.real == value
