@@ -178,3 +178,40 @@ class Testrectangle(unittest.TestCase):
         self.assertEqual(r1.__str__(), "[Rectangle] (12) 2/1 - 4/6")
         r2 = Rectangle(4, 6, 2, id=12)
         self.assertEqual(r2.__str__(), "[Rectangle] (12) 2/0 - 4/6")
+
+    def test_update(self):
+        """tests the update method"""
+        r1 = Rectangle(10, 10, 10, 10, 1)
+        self.assertEqual(str(r1), "[Rectangle] (1) 10/10 - 10/10")
+        r1.update(8)
+        self.assertEqual(str(r1), "[Rectangle] (8) 10/10 - 10/10")
+        r1.update(89, 4)
+        self.assertEqual(str(r1), "[Rectangle] (89) 10/10 - 4/10")
+        r1.update(89, 2, 3, 4, 5)
+        self.assertEqual(str(r1), "[Rectangle] (89) 4/5 - 2/3")
+        with self.assertRaisesRegex(TypeError, "height must be an integer"):
+            r1.update(89, 2, "3", 4, 5)
+        with self.assertRaisesRegex(ValueError, "x must be >= 0"):
+            r1.update(89, 2, 3, -4, 5)
+
+    def test_updateargs(self):
+        """tests the update with args and kwargs"""
+        r1 = Rectangle(10, 10, 10, 10, 1)
+        r1.update(width=1, x=2)
+        self.assertEqual(str(r1), "[Rectangle] (1) 2/10 - 1/10")
+        r1.update(y=1, width=2, x=3, id=89)
+        self.assertEqual(str(r1), "[Rectangle] (89) 3/1 - 2/10")
+        with self.assertRaisesRegex(TypeError, "height must be an integer"):
+            r1.update(height="3")
+        with self.assertRaisesRegex(ValueError, "x must be >= 0"):
+            r1.update(x=-3)
+
+    def test_to_dictionary(self):
+        """tests the dictionary method"""
+        r1 = Rectangle(10, 2, 1, 9, 89)
+        r1_dictionary = r1.to_dictionary()
+        r2 = Rectangle(1, 1)
+        s = "{'id': 89, 'width': 10, 'height': 2, 'x': 1, 'y': 9}"
+        self.assertEqual(str(r1_dictionary), s)
+        r2.update(**r1_dictionary)
+        self.assertEqual(str(r2), "[Rectangle] (89) 1/9 - 10/2")

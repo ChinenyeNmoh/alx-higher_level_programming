@@ -102,4 +102,27 @@ class Rectangle(Base):
     def __str__(self):
         """Return the print() and str() representation of the Rectangle."""
         return f"[Rectangle] ({self.id}) {self.x}/{self.y} - {self.width}/{self.height}"
+    def __update(self, id=None, width=None, height=None, x=None, y=None):
+        """Internal method to updates instance attributes with */**args."""
+        if id is not None:
+            self.id = id
+        if width is not None:
+            self.width = width
+        if height is not None:
+            self.height = height
+        if x is not None:
+            self.x = x
+        if y is not None:
+            self.y = y
 
+    def update(self, *args, **kwargs):
+        """Updates instance attributes with no-keyword & keyword args."""
+        if args:
+            self.__update(*args)
+        elif kwargs:
+            self.__update(**kwargs)
+
+    def to_dictionary(self):
+        """Returns dictionary representation of this class."""
+        return {"id": self.id, "width": self.width, "height": self.height,
+                "x": self.x, "y": self.y}
