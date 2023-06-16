@@ -10,7 +10,7 @@ from models.rectangle import Rectangle
 class Square(Rectangle):
     """class Square(subclass)from Rectangle class"""
     def __init__(self, size, x=0, y=0, id=None):
-        super().__init__(size,size, x,y,id)
+        super().__init__(size, size, x, y, id)
         self.size = size
 
     @property
@@ -25,8 +25,8 @@ class Square(Rectangle):
         self.height = value
 
     def __str__(self):
-      """Defines a format for the string representation of the class"""
-      return f"[Square] ({self.id}){self.x}/{self.y} - {self.size}"
+        """Defines a format for the string representation of the class"""
+        return f"[Square] ({self.id}) {self.x}/{self.y} - {self.size}"
 
     def __update(self, id=None, size=None, x=None, y=None):
         """Internal method that updates instance attributes with */**args"""

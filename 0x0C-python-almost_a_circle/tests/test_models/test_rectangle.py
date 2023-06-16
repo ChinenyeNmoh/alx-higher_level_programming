@@ -8,73 +8,74 @@ import unittest
 from models.base import Base
 from models.rectangle import Rectangle
 
+
 class Testrectangle(unittest.TestCase):
     """Unittests for testing instantiation of the Rectangle class."""
     def test2_init(self):
         """ testing class Rectangle logic"""
 
-        #testing with no id argument
+        """testing with no id argument"""
         self.assertEqual(Rectangle(10, 2).id, 1)
         self.assertEqual(Rectangle(4, 2, 3).id, 2)
         self.assertEqual(Rectangle(2, 3, 4, 5).id, 3)
 
-        #testing with specified id
+        """testing with specified id"""
         self.assertEqual(Rectangle(2, 3, 4, 5, 11).id, 11)
 
-        #testing id as str
+        """testing id as str"""
         self.assertEqual(Rectangle(2, 1, 3, 4, '12').id, '12')
 
-        #testing id with float
+        """testing id with float"""
         self.assertEqual(Rectangle(2, 1, 2, 4, 4.5).id, 4.5)
 
-        #testing width
+        """testing width"""
         self.assertEqual(Rectangle(2, 3, 4, 5).width, 2)
 
-        #testing height
+        """testing height"""
         self.assertEqual(Rectangle(2, 3, 4, 5).height, 3)
 
-        #testing x
+        """testing x"""
         self.assertEqual(Rectangle(2, 3).x, 0)
 
-        #testing y
+        """testing y"""
         self.assertEqual(Rectangle(2, 3).y, 0)
 
-        #Instantiation with no args.
+        """Instantiation with no args"""
         with self.assertRaises(TypeError):
             Rectangle()
 
-        #Instantiation missing one arg.
+        """Instantiation missing one arg"""
         with self.assertRaises(TypeError):
             Rectangle(1)
 
-        #testing with private width"""
+        """testing with private width"""
         with self.assertRaises(AttributeError):
             print(Rectangle(5, 5, 0, 0, 1).__width)
 
-        #testing with private height
+        """testing with private height"""
         with self.assertRaises(AttributeError):
             print(Rectangle(5, 5, 0, 0, 1).__height)
 
-        #private x
+        """private x"""
         with self.assertRaises(AttributeError):
             print(Rectangle(5, 5, 1).__x)
 
-        #private y
+        """private y"""
         with self.assertRaises(AttributeError):
             print(Rectangle(5, 5, 1).__y)
 
-        #check subclass
+        """check subclass"""
         r = Rectangle(2, 3, 4, 5)
         self.assertTrue(issubclass(type(r), Base))
 
-        #check instance
-        self.assertIsInstance(r,Base)
+        """check instance"""
+        self.assertIsInstance(r, Base)
 
         """unittest for task3"""
     def test3init(self):
         """testing logic"""
-    
-        #testing setters
+
+        """testing setters"""
         r = Rectangle(3, 7, 9, 1, 2)
         r.width = 10
         self.assertEqual(r.width, 10)
@@ -87,7 +88,7 @@ class Testrectangle(unittest.TestCase):
         r.id = 5
         self.assertEqual(r.id, 5)
 
-        #width is with non interger types
+        """width is with non interger types"""
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
             Rectangle(None, 2)
             Rectangle("8", 2)
@@ -98,7 +99,7 @@ class Testrectangle(unittest.TestCase):
             Rectangle({1, 3, 5, 7, 9}, 2)
             Rectangle(True, 2)
 
-        #height is with non interger types
+        """height is with non interger types"""
         with self.assertRaisesRegex(TypeError, "height must be an integer"):
             Rectangle(2, None)
             Rectangle(2, "8")
@@ -109,7 +110,7 @@ class Testrectangle(unittest.TestCase):
             Rectangle(2, {1, 3, 5, 7, 9})
             Rectangle(2, False)
 
-        #x is with non interger types
+        """x is with non interger types"""
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
             Rectangle(2, 3, None)
             Rectangle(2, 4, "8")
@@ -120,7 +121,7 @@ class Testrectangle(unittest.TestCase):
             Rectangle(4, 7, {1, 3, 5, 7, 9})
             Rectangle(4, 7, True)
 
-        #y is with non interger types
+        """y is with non interger types"""
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
             Rectangle(2, 3, 3, None)
             Rectangle(2, 4, 5, "8")
@@ -129,23 +130,23 @@ class Testrectangle(unittest.TestCase):
             Rectangle(1, 3, 3, (2, 3, 5, 7))
             Rectangle(2, 5, 8, [2, 3, 5, 7])
             Rectangle(4, 7, 9, {1, 3, 5, 7, 9})
-            Rectangle(4, 7, 9, True)        
+            Rectangle(4, 7, 9, True)
 
-        #testing width with 0 and negetive numbers
+        """testing width with 0 and negetive numbers"""
         with self.assertRaisesRegex(ValueError, "width must be > 0"):
             Rectangle(0, 2)
             Rectangle(-1, 2)
 
-        #testing height with 0 and negative num
+        """testing height with 0 and negative num"""
         with self.assertRaisesRegex(ValueError, "height must be > 0"):
             Rectangle(2, 0)
             Rectangle(2, -3)
 
-        #testing x with  negative num
+        """testing x with  negative num"""
         with self.assertRaisesRegex(ValueError, "x must be >= 0"):
             Rectangle(22, 3, -3, 4)
 
-        #testing y with  negative num
+        """testing y with  negative num"""
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
             Rectangle(22, 3, 4, -3)
 
@@ -154,7 +155,7 @@ class Testrectangle(unittest.TestCase):
         """testing area calculation"""
         self.assertEqual(Rectangle(3, 2).area(), 6)
         self.assertEqual(Rectangle(3, 2, 6, 7, 1).area(), 6)
- 
+
     """unittest for task 5 and 7"""
     def test_display__method(self):
         """display, without 'x' and 'y' """
@@ -164,7 +165,7 @@ class Testrectangle(unittest.TestCase):
             r1.display()
         self.assertEqual(capture.getvalue(), "##\n##\n##\n")
 
-        #display, with 'x' and 'y'
+        """display, with 'x' and 'y'"""
         r1 = Rectangle(2, 3, 1, 2)
         capture = StringIO()
         with redirect_stdout(capture):

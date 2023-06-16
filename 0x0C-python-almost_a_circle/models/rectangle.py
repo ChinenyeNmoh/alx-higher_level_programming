@@ -28,8 +28,8 @@ class Rectangle(Base):
 
     @property
     def width(self):
-         """gets width"""
-         return self.__width
+        """gets width"""
+        return self.__width
 
     @width.setter
     def width(self, value):
@@ -101,7 +101,9 @@ class Rectangle(Base):
 
     def __str__(self):
         """Return the print() and str() representation of the Rectangle."""
-        return f"[Rectangle] ({self.id}) {self.x}/{self.y} - {self.width}/{self.height}"
+        return f"[Rectangle] ({self.id}) {self.x}/{self.y} - " \
+            f"{self.width}/{self.height}"
+
     def __update(self, id=None, width=None, height=None, x=None, y=None):
         """Internal method to updates instance attributes with */**args."""
         if id is not None:
