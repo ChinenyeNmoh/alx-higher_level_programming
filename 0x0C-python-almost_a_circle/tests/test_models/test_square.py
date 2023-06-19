@@ -15,6 +15,7 @@ class Testrectangle(unittest.TestCase):
         """ testing class Square logic"""
 
         """testing with no id argument"""
+        Base._Base__nb_objects = 0
         self.assertEqual(Square(10, 2).id, 1)
         self.assertEqual(Square(4, 2, 3).id, 2)
         self.assertEqual(Square(2, 3, 4).id, 3)
