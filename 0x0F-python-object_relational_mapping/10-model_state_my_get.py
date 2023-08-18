@@ -1,9 +1,6 @@
 #!/usr/bin/python3
-"""
-This script lists all State objects
-from the database `hbtn_0e_6_usa`.
-"""
-
+"""script that prints the first State object from the database
+hbtn_0e_6_usa"""
 from sys import argv
 from model_state import State, Base
 from sqlalchemy import create_engine
@@ -15,8 +12,8 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-    s1 = session.query(State).order_by(State.id).first()
+    s1 = session.query(State).filter(State.name == argv[4]).first()
     if s1 is not None:
-        print(f"{s1.id}: {s1.name}")
+        print(s1.id)
     else:
-        print('Nothing')
+        print("Not found")
