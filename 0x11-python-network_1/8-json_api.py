@@ -14,7 +14,7 @@ if __name__ == "__main__":
     try:
         r = req.json()
         if r != {}:
-             print("[{}] {}".format(r.get("id"), r.get("name")))
+            print("[{}] {}".format(r.get("id"), r.get("name")))
         else:
             print("No result")
     except Exception:
